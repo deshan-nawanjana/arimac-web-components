@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="../../assets/images/index.svg" type="image/x-icon">
+    <!-- libraries -->
+    <script src="../../assets/libraries/vue.min.js"></script>
+    <!-- styles -->
+    <link rel="stylesheet" href="../../assets/styles/common.css">
+    <link rel="stylesheet" href="./index.css">
+    <!-- scripts -->
+    <script src="../../assets/scripts/api.js"></script>
+    <script src="../../assets/scripts/helpers.js"></script>
+    <script src="./index.js" defer></script>
+    <!-- page title -->
+    <title>Arimac</title>
+</head>
+<body>
+
+    <div id="container">
+        <!-- articles section -->
+        <div class="section">
+            <!-- section head -->
+             <div class="section-head">
+                <div class="section-head-title">
+                    Read our
+                    <span class="gradient">most popular</span>
+                    articles
+                </div>
+                <div class="section-head-description">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                </div>
+                <!-- blog posts page button mobile -->
+                <div class="section-button sb-mobile" @click="viewArticlesPage">
+                    <div class="section-button-label">Read Blogs</div>
+                    <div class="section-button-arrow"></div>
+                </div>
+             </div>
+             <!-- section body -->
+             <div class="section-body">
+                <!-- blog post item -->
+                <div class="blog-post-item"
+                    :loading="item === null"
+                    v-for="item in articles">
+                    <!-- post content -->
+                    <div class="bpi-content">
+                        <!-- post heading mobile -->
+                        <div class="bpi-heading-mobile">
+                            {{ item?.title?.$t }}
+                        </div>
+                        <!-- author info -->
+                        <div class="bpi-author">
+                            <div class="bpi-author-picture"
+                                :style="background(item?.author?.[0]?.gd$image?.src, 80)">
+                            </div>
+                            <div class="bpi-author-content">
+                                <div class="bpi-author-name">
+                                    {{ item?.author?.[0]?.name?.$t }}
+                                </div>
+                                <div class="bpi-author-time">
+                                    {{ date(item) }}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- post heading -->
+                        <div class="bpi-heading">
+                            {{ item?.title?.$t }}
+                        </div>
+                        <!-- post summary -->
+                        <div class="bpi-summary">
+                            {{ ellipsis(item?.summary?.$t, 200) }}
+                        </div>
+                        <!-- post button -->
+                        <div class="bpi-button">
+                            <span @click="viewArticle(item)">
+                                Read More
+                            </span>
+                        </div>
+                    </div>
+                    <!-- post image -->
+                    <div class="bpi-picture"
+                        :style="background(item?.media$thumbnail?.url, 300)">
+                    </div>
+                </div>
+             </div>
+             <!-- section foot -->
+            <div class="section-foot">
+                <!-- blog posts page button -->
+                <div class="section-button" @click="viewArticlesPage">
+                    <div class="section-button-label">Read Blogs</div>
+                    <div class="section-button-arrow"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

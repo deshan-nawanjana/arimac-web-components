@@ -1,0 +1,125 @@
+body {
+    text-align: center;
+}
+
+.section {
+    max-width: 920px;
+    padding: 80px 0px;
+}
+
+.section-load-more-button span {
+    height: 25px;
+    line-height: 25px;
+    color: #E63C2E;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.section-load-more-spinner {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-image: url(../../assets/images/spinner.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.section-load-more-end {
+    color: #767676;
+    font-size: 16px;
+}
+
+.blog-post-search {
+    text-align: center;
+}
+
+.bps-keyword {
+    height: 45px;
+    width: 280px;
+    background-color: #F3F3F3;
+    display: inline-block;
+    vertical-align: top;
+    margin: 5px;
+}
+
+.bps-keyword * {
+    height: 45px;
+    border: none;
+    vertical-align: top;
+    margin: 0px;
+    padding: 0px;
+    float: left;
+    outline: none;
+    background-color: transparent;
+}
+
+.bps-keyword-input {
+    width: calc(100% - 45px - 30px);
+    padding: 0px 15px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.bps-keyword-input::placeholder {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.bps-keyword-button {
+    width: 45px;
+    height: 45px;
+    background-image: url(../../assets/images/search.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 18px auto;
+    cursor: pointer;
+    transition: all 0.1s;
+}
+
+.bps-keyword-button:hover {
+    background-color: #1111;
+}
+
+.bps-keyword-button:active {
+    background-color: #1112;
+}
+
+.bps-category {
+    height: 45px;
+    width: 280px;
+    border: none;
+    background-color: #F3F3F3;
+    color: #2F2F2F;
+    font-weight: 600;
+    padding: 0px 15px;
+    cursor: pointer;
+    outline: none;
+    font-size: 16px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+    background-image: url(../../assets/images/drop.svg);
+    background-position: calc(100% - 18px) center;
+    background-size: 10px auto;
+    background-repeat: no-repeat;
+    vertical-align: top;
+    margin: 5px;
+}
+
+.bps-category option {
+    background-color: #F3F3F3;
+    border: none;
+    line-height: 30px;
+    font-size: 16px;
+}
+
+.bpi-content {
+    width: calc(100% - 220px - 20px);
+}
+
+.bpi-picture {
+    width: 220px;
+}

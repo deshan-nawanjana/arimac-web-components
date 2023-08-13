@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 50px;
+            text-align: center;
+        }
+        svg {
+            margin-top: calc(50vh - 150px);
+            max-width: 800px;
+        }
+    </style>
+    <title>Arimac Logo</title>
+</head>
+<body>
+    <div id="logo-container"></div>
+    <script type="module">
+        // method to animate
+        const animate = async (root, data, time) => {
+            // method to sleep time
+            const sleep = () => new Promise(resolve => setTimeout(resolve, time))
+            // get container element
+            const container = document.querySelector(root)
+            // append child content
+            container.innerHTML = data.content
+            // get all element name
+            const element_names = Object.keys(data.animations)
+            // elements object
+            const elements = {}
+            // for each element
+            for(let e = 0; e < element_names.length; e++) {
+                // current element name
+                const name = element_names[e]
+                // select element into object
+                elements[name] = container.querySelector('#' + name)
+            }
+            // for each frame
+            for(let i = 0; i < data.steps; i++) {
+                // for each element name
+                for(let e = 0; e < element_names.length; e++) {
+                    // current element name
+                    const element_name = element_names[e]
+                    // current element
+                    const element = elements[element_name]
+                    // current element attributes
+                    const attributes = data.animations[element_name]
+                    // get attribute names
+                    const attributes_names = Object.keys(attributes)
+                    // for each attribute name
+                    for(let a = 0; a < attributes_names.length; a++) {
+                        // current attribute name
+                        const attribute_name = attributes_names[a]
+                        // current attribute data
+                        const attribute_data = attributes[attribute_name]
+                        // check for current attribute value
+                        if(i in attribute_data) {
+                            // set attribute value
+                            element.setAttribute(attribute_name, attribute_data[i])
+                        }
+                    }
+                }
+                // frame delay
+                await sleep()
+            }
+        }
+        // fetch svg data
+        const data = await fetch('index.json').then(resp => resp.json())
+        // start animation
+        animate('#logo-container', data, 8)
+    </script>
+</body>
+</html>

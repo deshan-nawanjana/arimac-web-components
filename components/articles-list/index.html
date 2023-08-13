@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- favicon -->
+    <link rel="shortcut icon" href="../../assets/images/index.svg" type="image/x-icon">
+    <!-- libraries -->
+    <script src="../../assets/libraries/vue.min.js"></script>
+    <!-- styles -->
+    <link rel="stylesheet" href="../../assets/styles/common.css">
+    <link rel="stylesheet" href="./index.css">
+    <!-- scripts -->
+    <script src="../../assets/scripts/api.js"></script>
+    <script src="../../assets/scripts/helpers.js"></script>
+    <script src="./index.js" defer></script>
+    <!-- page title -->
+    <title>News &amp; Articles</title>
+</head>
+<body>
+
+    <div id="container">
+        <!-- articles section -->
+        <div class="section">
+            <!-- section head -->
+             <div class="section-head">
+                <div class="section-head-title">
+                    News &amp;
+                    <span class="gradient">Articles</span>
+                </div>
+                <div class="section-head-description">
+                    Lorem ipsum dolor sit amet consectetur adipiscing elit
+                    <br>
+                    interdum ullamcorper sed pharetra sene.
+                </div>
+                <!-- posts search options -->
+                <div class="blog-post-search">
+                    <!-- search keyword -->
+                    <div class="bps-keyword">
+                        <input class="bps-keyword-input"
+                            type="text"
+                            placeholder="Search"
+                            :disabled="busy"
+                            maxlength="20"
+                            @keydown="searchArticles"
+                            v-model="search.keyword"
+                        />
+                        <input class="bps-keyword-button"
+                            type="button"
+                            @click="searchArticles"
+                        />
+                    </div>
+                    <!-- category select -->
+                    <select class="bps-category"
+                        v-model="search.category"
+                        :disabled="busy"
+                        @change="loadArticles(true)">
+                        <option v-for="item in categories">{{ item }}</option>
+                    </select>
+                </div>
+             </div>
+             <!-- section body -->
+             <div class="section-body">
+                <!-- blog post item -->
+                <div class="blog-post-item"
+                    :loading="item === null"
+                    v-for="item in articles">
+                    <!-- post content -->
+                    <div class="bpi-content">
+                        <!-- post heading mobile -->
+                        <div class="bpi-heading-mobile">
+                            {{ item?.title?.$t }}
+                        </div>
+                        <!-- author info -->
+                        <div class="bpi-author">
+                            <div class="bpi-author-picture"
+                                :style="background(item?.author?.[0]?.gd$image?.src, 80)">
+                            </div>
+                            <div class="bpi-author-content">
+                                <div class="bpi-author-name">
+                                    {{ item?.author?.[0]?.name?.$t }}
+                                </div>
+                                <div class="bpi-author-time">
+                                    {{ date(item) }}
+                                </div>
+                            </div>
+                        </div>
+                        <!-- post heading -->
+                        <div class="bpi-heading">
+                            {{ item?.title?.$t }}
+                        </div>
+                        <!-- post categories -->
+                        <div class="bpi-categories">
+                            <div class="bpi-category-item"
+                                v-for="catg in item?.category"
+                                @click="search.category = catg?.term; loadArticles(true)">
+                                {{ catg?.term }}
+                            </div>
+                        </div>
+                        <!-- post summary -->
+                        <div class="bpi-summary">
+                            {{ ellipsis(item?.summary?.$t, 200) }}
+                        </div>
+                        <!-- post button -->
+                        <div class="bpi-button">
+                            <span @click="viewArticle(item)">
+                                Read More
+                            </span>
+                        </div>
+                    </div>
+                    <!-- post image -->
+                    <div class="bpi-picture"
+                        :style="background(item?.media$thumbnail?.url, 300)">
+                    </div>
+                </div>
+             </div>
+             <!-- section foot -->
+            <div class="section-foot">
+                <!-- posts load options -->
+                <div v-if="!ended">
+                    <!-- blog posts load button -->
+                    <div class="section-load-more-button" v-if="!busy">
+                        <span @click="loadArticles(false)">
+                            Load More
+                        </span>
+                    </div>
+                    <!-- blog posts load spinner -->
+                    <div class="section-load-more-spinner" v-if="busy"></div>
+                </div>
+                <div class="section-load-more-end" v-if="!busy && ended">
+                    {{
+                        articles.length === 0
+                            ? 'Sorry, no results were found'
+                            : 'End of results'
+                    }}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
