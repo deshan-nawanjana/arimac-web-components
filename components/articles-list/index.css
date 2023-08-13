@@ -116,10 +116,12 @@ body {
     font-size: 16px;
 }
 
-.bpi-content {
-    width: calc(100% - 220px - 20px);
-}
+@media (min-width: 580px) {
+    .bpi-content {
+        width: calc(100% - 220px - 20px);
+    }
 
-.bpi-picture {
-    width: 220px;
+    .bpi-picture {
+        width: 220px;
+    }
 }
