@@ -7,6 +7,10 @@ body {
     padding: 80px 0px;
 }
 
+.section-head {
+    margin-bottom: 15px;
+}
+
 .section-load-more-button span {
     height: 25px;
     line-height: 25px;
