@@ -50,6 +50,9 @@ new Vue({
     },
     async mounted() {
         const data = await API.getArticles(1, 2)
+        // set empty array if no entry node
+        if('entry' in data === false) { data.entry = [] }
+        // delay and set articles
         setTimeout(() => this.articles = data.entry, 500)
     }
 })

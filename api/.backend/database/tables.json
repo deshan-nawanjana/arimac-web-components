@@ -1,0 +1,16 @@
+{
+    "posts": {
+        "id": "VARCHAR(25)",
+        "title": "VARCHAR(200)",
+        "summary": "VARCHAR(500)",
+        "image": "VARCHAR(500)",
+        "updated_at": "VARCHAR(35)",
+        "category": "VARCHAR(100)",
+        "author_name": "VARCHAR(100)",
+        "author_image": "VARCHAR(500)",
+        "read_time": "INT(15)",
+        "view_count": "INT(15)",
+        "share_count": "INT(15)",
+        "available": "INT(1)"
+    }
+}

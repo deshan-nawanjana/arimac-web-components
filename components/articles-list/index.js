@@ -68,6 +68,8 @@ const app = new Vue({
                 ? this.search.category : ''
             // get articles
             const data = await API.getArticles(this.page, this.limit, this.search.keyword, category)
+            // set empty array if no entry node
+            if('entry' in data === false) { data.entry = [] }
             // loading delay
             setTimeout(() => {
                 // check reset mode

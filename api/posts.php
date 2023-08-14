@@ -1,21 +1,43 @@
 <?php
 
-    // import methods
+    require ".backend/backend.php";
     require ".backend/methods.php";
 
-    // page index of posts array
-    $page = (isset($_GET["page"]) ? intval($_GET["page"]) : 1);
-    // posts per page limitation
-    $limit = (isset($_GET["limit"]) ? intval($_GET["limit"]) : 10);
-    // category filter
-    $category = (isset($_GET["category"]) ? $_GET["category"] : "");
-    // search keyword
-    $search = (isset($_GET["search"]) ? $_GET["search"] : "");
-
-    // get all posts summary
-    $data = getAllPosts($page, $limit, $category, $search);
-
-    // echo post feed
-    echo json_encode($data["feed"]);
+    Endpoints([
+        "GET" => [
+            "callback" => function($request) {
+                // get request params
+                $params = $request["params"];
+                // page index
+                $page = intval(GetNode($params, "page", 1));
+                // posts per page
+                $limit = intval(GetNode($params, "limit", 10));
+                // search category
+                $category = GetNode($params, "category", "");
+                // search keyword
+                $search = GetNode($params, "search", "");
+                // get posts summaries
+                $data = getAllPosts($page, $limit, $category, $search);
+                // check feed node
+                if(isset($data["feed"])) {
+                    // get feed node
+                    $feed = $data["feed"];
+                    // check entry node
+                    if(isset($feed['entry'])) {
+                        // for each post
+                        foreach($feed['entry'] as $item) {
+                            // update posts table
+                            updatePostItemSummary($item);
+                        }
+                    }
+                    // return feed
+                    Response(200, $feed);
+                } else {
+                    // response error
+                    Response(500);
+                }
+            }
+        ]
+    ])
 
 ?>
