@@ -403,6 +403,8 @@ body {
 .blog-post-item[loading] .bpi-author-time::before,
 .blog-post-item[loading] .bpi-heading::before,
 .blog-post-item[loading] .bpi-heading-mobile::before,
+.blog-post-item[loading] .bpi-categories::before,
+.blog-post-item[loading] .bpi-categories::after,
 .blog-post-item[loading] .bpi-summary::before,
 .blog-post-item[loading] .bpi-summary::after,
 .blog-post-item[loading] .bpi-button span {
@@ -415,6 +417,8 @@ body {
 .blog-post-item[loading] .bpi-author-time::before,
 .blog-post-item[loading] .bpi-heading::before,
 .blog-post-item[loading] .bpi-heading-mobile::before,
+.blog-post-item[loading] .bpi-categories::before,
+.blog-post-item[loading] .bpi-categories::after,
 .blog-post-item[loading] .bpi-summary::before,
 .blog-post-item[loading] .bpi-summary::after {
     content: '.';
@@ -445,6 +449,17 @@ body {
     margin: 5px 0px;
 }
 
+[loading] .bpi-categories::before {
+    width: 90px;
+    height: 35px;
+}
+
+[loading] .bpi-categories::after {
+    width: 90px;
+    height: 35px;
+    margin-left: 8px;
+}
+
 [loading] .bpi-summary::before {
     margin-top: 10px;
 }
@@ -468,8 +483,8 @@ body {
 
 @media (max-width: 580px) {
     [loading] .bpi-heading-mobile::before {
-        width: 80%;
-        height: 15px;
+        width: 90%;
+        height: 38px;
         margin: 5px 0px;
     }
 
